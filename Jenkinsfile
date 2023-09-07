@@ -15,6 +15,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo 'Starting Build Phase'
                 // Run your build commands here.
                 // For example, if you're building a Java project with Maven:
             }
@@ -22,6 +23,7 @@ pipeline {
 
         stage('Test') {
             steps {
+                echo 'Starting Test Phase'
                 // Run your tests here.
                 // For example, if you're running JUnit tests:
             }
@@ -29,6 +31,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                echo 'Starting Deploy Phase'
                 // Deploy your application or artifacts to the desired environment.
                 // This could involve copying files, deploying to a server, etc.
                 // Replace this with your actual deployment steps.
