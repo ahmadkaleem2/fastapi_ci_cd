@@ -41,10 +41,12 @@ pipeline {
 
     post {
         success {
+            echo 'Starting post success Phase'
             // Actions to perform if the build is successful.
             // For example, you can send notifications or trigger downstream jobs.
         }
         failure {
+            echo 'Starting post failure Phase'
             // Actions to perform if the build fails.
             // For example, you can send notifications or take corrective actions.
         }
