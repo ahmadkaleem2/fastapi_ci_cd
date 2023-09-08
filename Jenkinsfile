@@ -7,8 +7,8 @@ pipeline {
             steps {
                 // Create a virtual environment and activate it.
                 echo 'making venv'
-                sh 'python -m venv venv'
-                sh 'source venv/bin/activate'
+                // sh 'python -m venv venv'
+                // sh 'source venv/bin/activate'
             }
         }
 
