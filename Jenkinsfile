@@ -7,8 +7,13 @@ pipeline {
             steps {
                 // Create a virtual environment and activate it.
                 echo 'making venv'
+                withPythonEnv('python') {
+    // Uses the default system installation of Python
+    // Equivalent to withPythonEnv('/usr/bin/python') 
                 sh 'python3 -m venv venv'
                 sh 'source venv/bin/activate'
+                }
+                
             }
         }
 
