@@ -7,7 +7,10 @@ pipeline {
             steps {
                 // Create a virtual environment and activate it.
                 echo 'making venv'
-                sh 'python -m venv venv'
+                sh 'sudo apt update'
+                sh 'sudo apt upgrade'
+                sh 'sudo apt install python3'
+                sh 'python3 -m venv venv'
                 sh 'source venv/bin/activate'
             }
         }
