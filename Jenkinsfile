@@ -5,7 +5,7 @@ pipeline {
 
         stage('Setup Virtual Environment') {
             steps {
-                echo "asd"
+                echo "SCM"
             }
         }
     }
