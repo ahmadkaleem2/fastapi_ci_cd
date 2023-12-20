@@ -9,6 +9,7 @@ client = TestClient(app)
 
 
 def test_root():
+    """Adding comment"""
 
     response = client.get("/")
     
