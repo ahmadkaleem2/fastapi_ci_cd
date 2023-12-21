@@ -9,7 +9,7 @@ client = TestClient(app)
 
 
 def test_root():
-    """Adding comment"""
+    """Return a simple hello world repsonse"""
 
     response = client.get("/")
     
