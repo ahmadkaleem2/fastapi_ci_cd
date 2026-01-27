@@ -1,0 +1,16 @@
+name: Pull Request CI
+
+on:
+  pull_request:
+    branches:
+      - production
+
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
