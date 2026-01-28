@@ -14,3 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: validate source branch
+        if: ${{ !startsWith(github.event.pull_request.head.ref, 'main') }}
+        run: |
+
+            echo "Source branch cannot be 'production'. Failing the build."
+            exit 1
+          
+
