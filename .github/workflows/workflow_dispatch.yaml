@@ -1,0 +1,16 @@
+name: Workflow B
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "Message from Workflow A"
+        required: true
+        default: "Hello from A"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: echo "Received: ${{ github.event.inputs.message }}"

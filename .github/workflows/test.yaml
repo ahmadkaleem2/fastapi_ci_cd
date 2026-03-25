@@ -1,25 +1,25 @@
-name: Pull Request CI
+# name: Pull Request CI
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - production
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
+#     branches:
+#       - production
 
 
-jobs:
-  build-test:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-test:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: validate source branch
-        if: ${{ !startsWith(github.head_ref, 'release/') }}
-        run: |
+#       - name: validate source branch
+#         if: ${{ !startsWith(github.head_ref, 'release/') }}
+#         run: |
 
-            echo "Source branch must be release/*'. Failing the build."
-            exit 1
+#             echo "Source branch must be release/*'. Failing the build."
+#             exit 1
           
 
