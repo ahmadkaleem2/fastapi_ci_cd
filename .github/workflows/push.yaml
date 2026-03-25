@@ -8,6 +8,8 @@ on:
 jobs:
   trigger-b:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write   # 👈 REQUIRED
     steps:
       - name: Trigger Workflow B
         run: |
@@ -16,8 +18,5 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/workflow_dispatch.yml/dispatches \
             -d '{
-              "ref": "main",
-              "inputs": {
-                "message": "Triggered from Workflow A"
-              }
+              "ref": "main"
             }'
