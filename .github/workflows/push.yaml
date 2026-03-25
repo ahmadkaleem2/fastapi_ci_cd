@@ -8,8 +8,8 @@ on:
 jobs:
   trigger-b:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write   # 👈 REQUIRED
+    # permissions:
+      # actions: write   # 👈 REQUIRED
     steps:
       - name: Trigger Workflow B
         run: |
