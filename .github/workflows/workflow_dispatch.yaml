@@ -6,7 +6,6 @@ on:
       message:
         description: "Message from Workflow A"
         required: true
-        default: "Hello from A"
 
 jobs:
   run:
