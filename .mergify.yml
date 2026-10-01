@@ -1,0 +1,12 @@
+# .mergify.yml
+pull_request_rules:
+  - name: Merge test-branch into main during the deploy window
+    conditions:
+      - base=main
+      - head=test-branch
+      - "#approved-reviews-by>=1"
+      - check-success=ci
+      - schedule=Mon-Fri 21:00-22:00[Asia/Karachi]
+    actions:
+      merge:
+        method: merge
