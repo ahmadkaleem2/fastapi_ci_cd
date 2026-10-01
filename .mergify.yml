@@ -5,7 +5,7 @@ queue_rules:
       - head=test-branch
       - "#approved-reviews-by>=1"
       - check-success=ci
-      - schedule=Mon-Fri 21:45-22:00[Asia/Karachi]
+      - schedule=Mon-Fri 21:47-22:00[Asia/Karachi]
     merge_method: merge
 
 pull_request_rules:
