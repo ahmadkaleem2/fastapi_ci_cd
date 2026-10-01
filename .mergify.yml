@@ -6,7 +6,7 @@ pull_request_rules:
       - head=test-branch
       - "#approved-reviews-by>=1"
       - check-success=ci
-      - schedule=Mon-Fri 21:30-22:00[Asia/Karachi]
+      - schedule=Mon-Fri 21:40-22:00[Asia/Karachi]
     actions:
       merge:
         method: merge
