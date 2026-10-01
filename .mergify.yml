@@ -1,12 +1,17 @@
-# .mergify.yml
-pull_request_rules:
-  - name: Merge test-branch into main during the deploy window
-    conditions:
+queue_rules:
+  - name: default
+    queue_conditions:
       - base=main
       - head=test-branch
       - "#approved-reviews-by>=1"
       - check-success=ci
-      - schedule=Mon-Fri 21:40-22:00[Asia/Karachi]
+      - schedule=Mon-Fri 21:45-22:00[Asia/Karachi]
+    merge_method: merge
+
+pull_request_rules:
+  - name: Queue test-branch into main during the deploy window
+    conditions:
+      - base=main
+      - head=test-branch
     actions:
-      merge:
-        method: merge
+      queue:
