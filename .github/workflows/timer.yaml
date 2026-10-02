@@ -1,0 +1,53 @@
+name: set-wait-timer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.REPO_ADMIN_TOKEN }}
+      URL: repos/${{ github.repository }}/environments/prod
+    steps:
+      - name: Fetch and validate WAIT_MINUTES
+        run: |
+          set -euo pipefail
+
+          if ! MINUTES=$(gh api "$URL/variables/WAIT_MINUTES" --jq .value); then
+            echo "::error::Could not read WAIT_MINUTES from the prod environment (404 or no access)"
+            exit 1
+          fi
+
+          if ! [[ "$MINUTES" =~ ^[0-9]+$ ]] || [ "$MINUTES" -lt 1 ] || [ "$MINUTES" -gt 43200 ]; then
+            echo "::error::Invalid WAIT_MINUTES '$MINUTES' (must be an integer from 1 to 43200)"
+            exit 1
+          fi
+
+          MINUTES=$((10#$MINUTES))
+          echo "Validated WAIT_MINUTES: $MINUTES"
+          echo "MINUTES=$MINUTES" >> "$GITHUB_ENV"
+
+      - name: Build updated environment config
+        run: |
+          set -euo pipefail
+
+          gh api "$URL" > current.json
+          jq --argjson m "$MINUTES" '
+            (.protection_rules // []) as $r
+            | {
+                wait_timer: $m,
+                reviewers: [$r[] | select(.type=="required_reviewers") | .reviewers[] | {type: .type, id: .reviewer.id}],
+                prevent_self_review: ([$r[] | select(.type=="required_reviewers") | .prevent_self_review] | first // false),
+                deployment_branch_policy: .deployment_branch_policy
+              }' current.json > new.json
+          echo "Current environment config:"
+          cat current.json
+          echo "Updated environment config:"
+          cat new.json
+
+      - name: Update environment
+        run: |
+          set -euo pipefail
+          gh api -X PUT "$URL" --input new.json
+          echo "Wait timer updated to $MINUTES minutes"
