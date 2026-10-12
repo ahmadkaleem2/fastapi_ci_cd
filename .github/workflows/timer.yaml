@@ -1,10 +1,14 @@
-name: set-wait-timer
+name: Set wait timer for prod environment
 
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+
 jobs:
-  apply:
+  wait_timer:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.REPO_ADMIN_TOKEN }}
