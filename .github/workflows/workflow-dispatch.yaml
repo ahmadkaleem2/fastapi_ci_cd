@@ -1,0 +1,34 @@
+name: Manual Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      run_tests:
+        description: 'Run automated tests?'
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Report Inputs
+        run: |
+          echo "Deploying to: ${{ github.event.inputs.environment }}"
+          echo "Run tests? ${{ github.event.inputs.run_tests }}"
+
+      - name: Run Tests
+        if: ${{ github.event.inputs.run_tests == 'true' }}
+        run: echo "Running tests..."
